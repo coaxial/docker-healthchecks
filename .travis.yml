@@ -1,0 +1,13 @@
+---
+jobs:
+  include:
+    - stage: test
+      services:
+        - docker
+      install:
+        - cp -r config/examples/* config/
+        - cp hc.example.env hc.env
+        - cp db.example.env db.env
+        - rm app/.gitkeep
+        - git clone https://github.com/healthchecks/healthchecks app/
+      script: docker-compose up -d && sleep 30 && curl -sfL http://localhost:8080 | grep -q 'Monitor and Get Notified When Your Cron Jobs Fail.'

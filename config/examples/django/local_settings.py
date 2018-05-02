@@ -11,10 +11,11 @@ EMAIL_USE_TLS = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgres',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hc',
         'USER': 'postgres',
-        'PASSWORD': 'secure',
+        'PASSWORD': 'mysecretpassword',
+        'HOST': 'db',
         'TEST': {'CHARSET': 'UTF8'}
     }
 }
