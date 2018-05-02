@@ -1,1 +1,3 @@
 db.env
+config/nginx/*.conf
+config/django/local_settings.py

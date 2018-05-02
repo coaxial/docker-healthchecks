@@ -2,9 +2,12 @@
 
 # Files
 
+Example files available at `config/examples` for their equivalents at `config/`.
+
 filename | purpose | notes
 ---|---|---
-`files/local_settings.py` | settings for the application | cf. https://github.com/healthchecks/healthchecks#configuration
+`config/django/local_settings.py` | settings for the application | cf. https://github.com/healthchecks/healthchecks#configuration
+`config/nginx/*.conf` | nginx configuration file | any name is fine, will be mounted at /etc/nginx/conf.d/ in the nginx container
 `db.env` | env variables for the database container | cg `db.example.env`
 
 # Volumes
