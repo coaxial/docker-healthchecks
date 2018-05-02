@@ -1,0 +1,34 @@
+---
+version: '3'
+services:
+  hc:
+    build: .
+    volumes:
+      - static_files:/usr/src/app/static-collected
+    expose:
+      - "8000"
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "8080:8080"
+    volumes:
+      - static_files:/static:ro
+      - ./config/nginx/:/etc/nginx/conf.d/:ro
+    depends_on:
+      - hc
+  # alerts-worker:
+  #   build: .
+  #   command: ["python", "/usr/src/app/healthchecks/manage.py", "sendalerts"]
+  # cleanup-worker:
+  # jobber
+  # db:
+  #   image: postgres:10.3
+  #   env_file: db.env
+  #   restart: always
+  #   volumes:
+  #     - db:/var/lib/postgresql/data
+  # backup:
+
+volumes:
+  static_files:
+#   db:
