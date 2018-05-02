@@ -1,0 +1,8 @@
+# shellcheck shell=sh
+#!/usr/bin/with-contenv sh
+
+CORES_COUNT=$(grep -c ^processor /proc/cpuinfo)
+# as per the gunicron docs
+WORKERS_COUNT=$((CORES_COUNT + 1))
+
+exec gunicorn hc.wsgi --bind 0.0.0.0:8000 --workers $WORKERS_COUNT

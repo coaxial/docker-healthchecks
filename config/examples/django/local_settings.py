@@ -8,6 +8,17 @@ EMAIL_HOST_USER = "healthchecks"
 EMAIL_HOST_PASSWORD = "supersecure"
 EMAIL_USE_TLS = True
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgres',
+        'NAME': 'hc',
+        'USER': 'postgres',
+        'PASSWORD': 'secure',
+        'TEST': {'CHARSET': 'UTF8'}
+    }
+}
+
 ALLOWED_HOSTS = ['app']
 DEBUG = False
 LOGGING = {

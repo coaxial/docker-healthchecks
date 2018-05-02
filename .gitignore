@@ -1,3 +1,6 @@
-db.env
+*.env
+!*.example.env
 config/nginx/*.conf
 config/django/local_settings.py
+app/*
+!app/.gitkeep

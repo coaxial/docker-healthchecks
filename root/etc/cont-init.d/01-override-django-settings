@@ -1,0 +1,4 @@
+# shellsheck shell=sh
+#!/usr/bin/with-contenv sh
+
+cp /usr/src/config/local_settings.py ${APP_PATH}/hc/local_settings.py
