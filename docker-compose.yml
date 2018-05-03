@@ -2,13 +2,11 @@
 version: '3'
 services:
   hc:
-    build: .
+    build: ./hc
     volumes:
       - ./config/django:/usr/src/config:ro
       - static_files:/usr/src/app/static-collected
     env_file: hc.env
-    expose:
-      - "8000"
     depends_on:
       - db
   nginx:
@@ -29,8 +27,6 @@ services:
     image: postgres:10.3
     env_file: db.env
     restart: always
-    expose:
-      - "5432"
     volumes:
       - db:/var/lib/postgresql/data
   # backup:

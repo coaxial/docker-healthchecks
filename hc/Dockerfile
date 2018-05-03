@@ -1,8 +1,10 @@
 FROM python:3
 
-ENV APP_PATH=/usr/src/app
-ENV PYTHONPATH=${APP_PATH}
 ARG GUNICORN_VERSION=19.8
+ARG HC_VERSION=1.0.4
+ENV SRC_PATH=/usr/src
+ENV APP_PATH=$SRC_PATH/app
+ENV PYTHONPATH=${APP_PATH}
 
 # install s6-overlay
 ARG S6_OVERLAY_VERSION=1.21.4.0
@@ -16,10 +18,11 @@ rm /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz
 
 RUN pip install --no-cache-dir gunicorn==$GUNICORN_VERSION
 
-RUN mkdir $APP_PATH
-ADD ./app/requirements.txt $APP_PATH
+ADD https://github.com/healthchecks/healthchecks/archive/v$HC_VERSION.tar.gz /tmp
+RUN tar xzf /tmp/v$HC_VERSION.tar.gz -C $SRC_PATH &&\
+  rm /tmp/v$HC_VERSION.tar.gz &&\
+  mv $SRC_PATH/healthchecks-$HC_VERSION $APP_PATH
 RUN pip install --no-cache -r $APP_PATH/requirements.txt
-ADD ./app $APP_PATH
 
 COPY root/ /
 
