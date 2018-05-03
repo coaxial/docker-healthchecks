@@ -2,20 +2,22 @@
 version: '3'
 services:
   hc:
-    build: ./hc
+    build: ./hc/app
     volumes:
-      - ./config/django:/usr/src/config:ro
+      - ./hc/app/config:/usr/src/config:ro
       - static_files:/usr/src/app/static-collected
-    env_file: hc.env
+    env_file: hc/hc.env
+    restart: always
     depends_on:
       - db
   nginx:
     image: nginx:1.13
     ports:
-      - "8080:8080"
+      - "6863:6863"
+    restart: always
     volumes:
       - static_files:/static:ro
-      - ./config/nginx/:/etc/nginx/conf.d/:ro
+      - ./nginx/config/:/etc/nginx/conf.d/:ro
     depends_on:
       - hc
   # alerts-worker:
@@ -25,7 +27,7 @@ services:
   # jobber
   db:
     image: postgres:10.3
-    env_file: db.env
+    env_file: db/db.env
     restart: always
     volumes:
       - db:/var/lib/postgresql/data

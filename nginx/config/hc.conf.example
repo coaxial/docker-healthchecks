@@ -4,7 +4,7 @@ upstream app {
 }
 
 server {
-  listen 8080;
+  listen 6863;
   server_name localhost;
 
   location /static/ {
