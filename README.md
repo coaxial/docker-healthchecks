@@ -27,6 +27,7 @@ file | name | purpose | notes
 `hc/hc.env` | `SU_EMAIL` | superuser email address | first user created when launching the app
 `hc/hc.env` | `SU_PASSWORD` | superuser password
 `hc/hc.env` | `SU_USERNAME` | superuser name
+`hc/hc.env` | `PG_PASSWORD` | postgresql password
 
 
 # Usage

@@ -1,0 +1,33 @@
+[prefs]
+notifyProgram: wget https://hchk.io/example-uuid -O /dev/null
+runLog:
+  type: file
+  path: /var/log/jobber-runs
+  maxLen: 30
+  maxHistories: 2
+
+[jobs]
+- name: clean database (pings)
+  cmd: /usr/bin/with-contenv sh -c '"${APP_PATH}"/manage.py prunepings'
+  # time: monthly
+  onError: Backoff
+  notifyOnFailure: false
+  notifyOnSuccess: true
+- name: clean database (checks)
+  cmd: /usr/bin/with-contenv sh -c '"${APP_PATH}"/manage.py prunechecks'
+  time: monthly
+  onError: Backoff
+  notifyOnFailure: false
+  notifyOnSuccess: true
+- name: clean database (notifications)
+  cmd: /usr/bin/with-contenv sh -c '"${APP_PATH}"/manage.py prunenotifications'
+  time: monthly
+  onError: Backoff
+  notifyOnFailure: false
+  notifyOnSuccess: true
+- name: clean database (users)
+  cmd: /usr/bin/with-contenv sh -c '"${APP_PATH}"/manage.py pruneusers'
+  time: monthly
+  onError: Backoff
+  notifyOnFailure: false
+  notifyOnSuccess: true

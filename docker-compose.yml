@@ -1,11 +1,19 @@
 ---
 version: '3'
 services:
-  hc:
+  hc-app:
     build: ./hc/app
     volumes:
       - ./hc/app/config:/usr/src/config:ro
       - static_files:/usr/src/app/static-collected
+    env_file: hc/hc.env
+    restart: always
+    depends_on:
+      - db
+  hc-alerts:
+    build: ./hc/alerts
+    volumes:
+      - ./hc/app/config:/usr/src/config:ro
     env_file: hc/hc.env
     restart: always
     depends_on:
@@ -19,10 +27,7 @@ services:
       - static_files:/static:ro
       - ./nginx/config/:/etc/nginx/conf.d/:ro
     depends_on:
-      - hc
-  # alerts-worker:
-  #   build: .
-  #   command: ["python", "/usr/src/app/healthchecks/manage.py", "sendalerts"]
+      - hc-app
   # cleanup-worker:
   # jobber
   db:
