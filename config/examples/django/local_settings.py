@@ -20,7 +20,9 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['app']
+# this is ok because the gunicorn container doesn't have any
+# public ports; only the nginx container can access it
+ALLOWED_HOSTS = ['*']
 DEBUG = False
 LOGGING = {
     'version': 1,

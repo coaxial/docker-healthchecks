@@ -4,7 +4,6 @@ services:
   hc:
     build: .
     volumes:
-      # - ./files:/scripts:ro
       - ./config/django:/usr/src/config:ro
       - static_files:/usr/src/app/static-collected
     env_file: hc.env

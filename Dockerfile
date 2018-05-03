@@ -14,14 +14,14 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY
 RUN tar xzf /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz -C / &&\
 rm /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz
 
-COPY root/ /
-
 RUN pip install --no-cache-dir gunicorn==$GUNICORN_VERSION
 
 RUN mkdir $APP_PATH
 ADD ./app/requirements.txt $APP_PATH
 RUN pip install --no-cache -r $APP_PATH/requirements.txt
 ADD ./app $APP_PATH
+
+COPY root/ /
 
 VOLUME $APP_PATH
 EXPOSE 8000
