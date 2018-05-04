@@ -29,7 +29,6 @@ file | name | purpose | notes
 `hc/hc.env` | `SU_USERNAME` | superuser name
 `hc/hc.env` | `PG_PASSWORD` | postgresql password
 
-
 # Usage
 
 `docker-compose up` and then access via `http://localhost:6863/admin`. Use the superuser's credential defined in `hc.env`.

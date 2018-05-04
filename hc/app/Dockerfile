@@ -27,6 +27,7 @@ ADD https://github.com/healthchecks/healthchecks/archive/v$HC_VERSION.tar.gz /tm
 RUN tar xzf /tmp/v$HC_VERSION.tar.gz -C $SRC_PATH &&\
   rm /tmp/v$HC_VERSION.tar.gz &&\
   mv $SRC_PATH/healthchecks-$HC_VERSION $APP_PATH
+
 RUN pip install --no-cache -r $APP_PATH/requirements.txt
 
 COPY root/ /
@@ -34,4 +35,6 @@ COPY root/ /
 VOLUME $APP_PATH
 EXPOSE 8000
 
+# necessary to get the output from Python's stdout.write instantly
+ENV PYTHONUNBUFFERED=1
 ENTRYPOINT ["/init"]
