@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-exec s6-setuidgid nobody "${APP_PATH}"/manage.py sendalerts
+# Remove -- MARK <timestamp> -- because it clutters the logs for no reason.
+exec s6-setuidgid nobody "${APP_PATH}"/manage.py sendalerts 2>&1 | sed --unbuffered -e '/^-- MARK/d' -e 's/.*/sendalerts: &/'

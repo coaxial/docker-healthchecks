@@ -14,7 +14,7 @@ ENV PYTHONPATH=${APP_PATH}
 # install s6-overlay
 ARG S6_OVERLAY_VERSION=1.21.4.0
 ARG S6_OVERLAY_ARCH=x86
-ENV S6_LOGGING_SCRIPT ""
+ENV S6_LOGGING_SCRIPT=T
 
 ADD https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-$S6_OVERLAY_ARCH.tar.gz /tmp
 
