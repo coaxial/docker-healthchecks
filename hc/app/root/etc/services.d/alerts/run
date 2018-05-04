@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+mkdir /var/log/alerts
+chmod 777 /var/log/alerts
+exec s6-setuidgid nobody "${APP_PATH}"/manage.py sendalerts

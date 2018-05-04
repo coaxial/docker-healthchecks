@@ -10,14 +10,14 @@ services:
     restart: always
     depends_on:
       - db
-  hc-alerts:
-    build: ./hc/alerts
-    volumes:
-      - ./hc/app/config:/usr/src/config:ro
-    env_file: hc/hc.env
-    restart: always
-    depends_on:
-      - db
+  # hc-alerts:
+  #   build: ./hc/alerts
+  #   volumes:
+  #     - ./hc/app/config:/usr/src/config:ro
+  #   env_file: hc/hc.env
+  #   restart: always
+  #   depends_on:
+  #     - db
   nginx:
     image: nginx:1.13
     ports:
