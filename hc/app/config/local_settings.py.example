@@ -1,4 +1,5 @@
-SITE_ROOT = "http://localhost"
+SITE_ROOT = "http://localhost:6863"
+PING_ENDPOINT = SITE_ROOT + '/ping/'
 SITE_NAME = "test hc"
 DEFAULT_FROM_EMAIL = "healthchecks@example.com"
 
@@ -7,7 +8,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "healthchecks"
 EMAIL_HOST_PASSWORD = "supersecure"
 EMAIL_USE_TLS = True
-
 
 DATABASES = {
     'default': {
