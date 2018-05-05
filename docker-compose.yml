@@ -19,7 +19,7 @@ services:
       - static_files:/static:ro
       - ./nginx/config/:/etc/nginx/conf.d/:ro
     depends_on:
-      - hc-app
+      - app
   # cleanup-worker:
   # jobber
   db:

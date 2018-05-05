@@ -1,6 +1,6 @@
 SITE_ROOT = "http://localhost:6863"
 PING_ENDPOINT = SITE_ROOT + '/ping/'
-SITE_NAME = "test hc"
+SITE_NAME = "Example Healthchecks Application"
 DEFAULT_FROM_EMAIL = "healthchecks@example.com"
 
 EMAIL_HOST = "example.com"
