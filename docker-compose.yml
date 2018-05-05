@@ -2,11 +2,11 @@
 version: '3'
 services:
   app:
-    build: ./hc/app
+    build: ./app
     volumes:
-      - ./hc/app/config:/usr/src/config:ro
+      - ./app/config:/usr/src/config:ro
       - static_files:/usr/src/app/static-collected
-    env_file: hc/hc.env
+    env_file: app/app.env
     restart: always
     depends_on:
       - db
@@ -20,8 +20,6 @@ services:
       - ./nginx/config/:/etc/nginx/conf.d/:ro
     depends_on:
       - app
-  # cleanup-worker:
-  # jobber
   db:
     image: postgres:10.3
     env_file: db/db.env

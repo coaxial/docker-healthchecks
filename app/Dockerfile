@@ -32,6 +32,15 @@ RUN pip install --no-cache -r $APP_PATH/requirements.txt
 
 COPY root/ /
 
+# snooze is a ligther cron (kinda), cf. https://github.com/chneukirchen/snooze
+ADD https://api.github.com/repos/chneukirchen/snooze/tarball/master /tmp
+RUN mkdir /tmp/snooze &&\
+  tar xzf /tmp/master -C /tmp/snooze --strip 1 &&\
+  cd /tmp/snooze &&\
+  make install &&\
+  rm -rf /tmp/snooze &&\
+  rm -rf /tmp/master
+
 VOLUME $APP_PATH
 EXPOSE 8000
 
