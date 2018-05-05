@@ -1,6 +1,6 @@
 upstream app {
   ip_hash;
-  server hc-app:8000;
+  server app:8000;
 }
 
 server {

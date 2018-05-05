@@ -6,7 +6,7 @@ RUN apt update &&\
   rm -rf /var/lib/apt/lists/*
 
 ARG GUNICORN_VERSION=19.8
-ARG HC_VERSION=1.0.4
+ARG HC_VERSION=521b089
 ENV SRC_PATH=/usr/src
 ENV APP_PATH=$SRC_PATH/app
 ENV PYTHONPATH=${APP_PATH}
@@ -23,10 +23,10 @@ rm /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz
 
 RUN pip install --no-cache-dir gunicorn==$GUNICORN_VERSION
 
-ADD https://github.com/healthchecks/healthchecks/archive/v$HC_VERSION.tar.gz /tmp
-RUN tar xzf /tmp/v$HC_VERSION.tar.gz -C $SRC_PATH &&\
-  rm /tmp/v$HC_VERSION.tar.gz &&\
-  mv $SRC_PATH/healthchecks-$HC_VERSION $APP_PATH
+ADD https://api.github.com/repos/healthchecks/healthchecks/tarball/$HC_VERSION /tmp
+RUN tar xzf /tmp/$HC_VERSION -C $SRC_PATH &&\
+  rm /tmp/$HC_VERSION &&\
+  mv $SRC_PATH/healthchecks-healthchecks-$HC_VERSION $APP_PATH
 
 RUN pip install --no-cache -r $APP_PATH/requirements.txt
 
