@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
+
+exec snooze -v -H/1 borgmatic -c /etc/borgmatic/config.yaml 2>&1 | sed --unbuffered 's/.*/borgmatic: &/'

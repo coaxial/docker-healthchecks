@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
+
+exec logutil-service 1

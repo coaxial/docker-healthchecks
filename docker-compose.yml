@@ -1,0 +1,42 @@
+---
+version: '3'
+services:
+  app:
+    build: ./app
+    volumes:
+      - ./app/config:/usr/src/config:ro
+      - static_files:/usr/src/app/static-collected
+    env_file: app/app.env
+    restart: always
+    depends_on:
+      - db
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "6863:6863"
+    restart: always
+    volumes:
+      - static_files:/static:ro
+      - ./nginx/config/:/etc/nginx/conf.d/:ro
+    depends_on:
+      - app
+  db:
+    image: postgres:10.3
+    env_file: db/db.env
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+  backups:
+    build: ./backups
+    env_file: db/db.env
+    restart: always
+    volumes:
+      - ./backups/ssh:/root/.ssh:ro
+      - ./backups/passphrase:/root/passphrase:ro
+      - ./backups/config.yaml:/etc/borgmatic/config.yaml:ro
+    depends_on:
+      - db
+
+volumes:
+  static_files:
+  db:

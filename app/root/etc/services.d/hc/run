@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
+
+NUM_CORES=$(grep -c ^processor /proc/cpuinfo)
+# as per the gunicron docs
+WORKERS_COUNT=$((2 * NUM_CORES + 1))
+
+# Remove the timestamp from gunicorn because s-6log already write one with T, no need for both
+exec s6-setuidgid nobody gunicorn hc.wsgi --bind 0.0.0.0:8000 --workers $WORKERS_COUNT 2>&1 | sed --unbuffered -e 's/^\[[0-9 :+\-]\{1,\}\] //' -e 's/.*/app: &/'
