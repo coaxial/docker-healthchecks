@@ -9,4 +9,7 @@ jobs:
         - cp nginx/config/app.conf.example nginx/config/app.conf
         - cp app/app.env.example app/app.env
         - cp db/db.env.example db/db.env
+        - cp backups/ssh/known_hosts.example backups/ssh/known_hosts
+        - cp backups/passphrase.example backups/passphrase
+        - touch backups/ssh/id_rsa{,.pub}
       script: docker-compose up -d && sleep 30 && curl -sfL http://localhost:6863 | grep -q 'Monitor and Get Notified When Your Cron Jobs Fail.'

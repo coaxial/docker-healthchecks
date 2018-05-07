@@ -32,3 +32,9 @@ file | name | purpose | notes
 # Usage
 
 `docker-compose up` and then access via `http://localhost:6863/admin`. Use the superuser's credential defined in `hc.env`.
+
+# Backups
+
+The `backups` service will dump the database and back it up to a borg repository.
+
+It requires a valid borgmatic config file (cf. config.example.yaml) and valid ssh keys in `backups/ssh`. If backing up to a remote borg repo, the remote host's key needs to be added into `backups/ssh/know_hosts`. To get the host's key, run `ssh-keyscan host`.

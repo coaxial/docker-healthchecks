@@ -1,3 +1,8 @@
 *.env
 *.conf
 local_settings.py
+id_rsa
+id_rsa.pub
+known_hosts
+passphrase
+config.yaml

@@ -2,7 +2,7 @@ FROM python:3
 
 # apt is extremely slow in this container, we want this cached the most
 RUN apt update &&\
-  apt-get install postgresql-client netcat --no-install-recommends -y &&\
+  apt-get install netcat --no-install-recommends -y &&\
   rm -rf /var/lib/apt/lists/*
 
 ARG GUNICORN_VERSION=19.8

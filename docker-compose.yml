@@ -26,7 +26,16 @@ services:
     restart: always
     volumes:
       - db:/var/lib/postgresql/data
-  # backup:
+  backups:
+    build: ./backups
+    env_file: db/db.env
+    restart: always
+    volumes:
+      - ./backups/ssh:/root/.ssh:ro
+      - ./backups/passphrase:/root/passphrase:ro
+      - ./backups/config.yaml:/etc/borgmatic/config.yaml:ro
+    depends_on:
+      - db
 
 volumes:
   static_files:
