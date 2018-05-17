@@ -1,5 +1,7 @@
 # healthchecks.io docker container
 
+[![Build Status](https://travis-ci.org/coaxial/docker-healthchecks.svg?branch=master)](https://travis-ci.org/coaxial/docker-healthchecks)
+
 # Files
 
 Example files available in their respective locations with the `.example` extension.
