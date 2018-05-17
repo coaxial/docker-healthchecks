@@ -10,6 +10,9 @@ services:
     restart: always
     depends_on:
       - db
+    networks:
+      - backend
+      - db
   nginx:
     image: nginx:1.13
     ports:
@@ -20,12 +23,16 @@ services:
       - ./nginx/config/:/etc/nginx/conf.d/:ro
     depends_on:
       - app
+    networks:
+      - backend
   db:
     image: postgres:10.3
     env_file: db/db.env
     restart: always
     volumes:
       - db:/var/lib/postgresql/data
+    networks:
+      - db
   backups:
     build: ./backups
     env_file: db/db.env
@@ -36,7 +43,13 @@ services:
       - ./backups/config.yaml:/etc/borgmatic/config.yaml:ro
     depends_on:
       - db
+    networks:
+      - db
 
 volumes:
   static_files:
+  db:
+
+networks:
+  backend:
   db:
