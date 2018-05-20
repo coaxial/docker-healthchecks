@@ -1,4 +1,4 @@
-# healthchecks.io docker container
+# healthchecks.io Docker service
 
 [![Build Status](https://travis-ci.org/coaxial/docker-healthchecks.svg?branch=master)](https://travis-ci.org/coaxial/docker-healthchecks)
 
@@ -35,8 +35,14 @@ file | name | purpose | notes
 
 `docker-compose up` and then access via `http://localhost:6863/admin`. Use the superuser's credential defined in `hc.env`.
 
+For a more advanced deployment (https, restore the latest backup), see these Ansible roles: [`coaxial.docker-proxy`](https://galaxy.ansible.com/coaxial/docker-proxy) and [`coaxial.healthchecks`](https://galaxy.ansible.com/coaxial/healthchecks).
+
 # Backups
 
-The `backups` service will dump the database and back it up to a borg repository.
+The `backups` service will dump the database and back it up to a [borg](http://borgbackup.readthedocs.io/) repository.
 
-It requires a valid borgmatic config file (cf. config.example.yaml) and valid ssh keys in `backups/ssh`. If backing up to a remote borg repo, the remote host's key needs to be added into `backups/ssh/know_hosts`. To get the host's key, run `ssh-keyscan host`.
+It requires a valid [borgmatic](https://torsion.org/borgmatic/) config file (cf. config.example.yaml) and valid ssh keys in `backups/ssh`. If backing up to a remote borg repo, the remote host's key needs to be added into `backups/ssh/know_hosts`. To get the host's key, run `ssh-keyscan host`.
+
+# Security considerations
+
+The app will be served over http, but it is very much recommended to use https. This can be achieved with a nginx proxy and lets encrypt (cf. Usage).
